@@ -38,7 +38,7 @@ const ProductDetails = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/wishlist",
+        `${import.meta.env.VITE_API_URL}/wishlist`,
         {
           method: "GET",
 
@@ -126,7 +126,7 @@ const ProductDetails = () => {
       if (isWishlisted) {
 
         const response = await fetch(
-          `http://localhost:5000/api/wishlist/${product._id}`,
+          `${import.meta.env.VITE_API_URL}/wishlist/${product._id}`,
           {
             method: "DELETE",
 
@@ -184,7 +184,7 @@ const ProductDetails = () => {
       // =====================================
 
       const response = await fetch(
-        "http://localhost:5000/api/wishlist",
+        `${import.meta.env.VITE_API_URL}/wishlist`,
         {
           method: "POST",
 
@@ -281,7 +281,7 @@ const ProductDetails = () => {
 
 
       const response = await fetch(
-        "http://localhost:5000/api/cart",
+        `${import.meta.env.VITE_API_URL}/cart`,
         {
           method: "POST",
 
@@ -378,7 +378,7 @@ const ProductDetails = () => {
 
 
       const response = await fetch(
-        "http://localhost:5000/api/cart",
+        `${import.meta.env.VITE_API_URL}/cart`,
         {
           method: "POST",
 

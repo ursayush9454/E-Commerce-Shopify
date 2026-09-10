@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Checkout.css";
 
+
 const Checkout = () => {
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ const Checkout = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/cart",
+        `${import.meta.env.VITE_API_URL}/cart`,
         {
           method: "GET",
           headers: {
@@ -103,7 +104,7 @@ const Checkout = () => {
       setPlacingOrder(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/orders/place",
+       `${import.meta.env.VITE_API_URL}/orders/place`,
         {
           method: "POST",
 

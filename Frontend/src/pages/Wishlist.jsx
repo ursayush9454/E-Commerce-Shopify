@@ -22,7 +22,7 @@ const Wishlist = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/wishlist",
+        `${import.meta.env.VITE_API_URL}/wishlist`,
         {
           method: "GET",
           headers: {
@@ -68,7 +68,7 @@ const Wishlist = () => {
   const removeFromWishlist = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/wishlist/${productId}`,
+        `${import.meta.env.VITE_API_URL}/wishlist/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -114,7 +114,7 @@ const Wishlist = () => {
   const addToCart = async (productId) => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/cart",
+        `${import.meta.env.VITE_API_URL}/cart`,
         {
           method: "POST",
 

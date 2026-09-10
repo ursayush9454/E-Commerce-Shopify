@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import "./Cart.css";
 
 const Cart = () => {
@@ -21,7 +22,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/cart",
+        `${import.meta.env.VITE_API_URL}/cart`,
         {
           method: "GET",
           headers: {
@@ -94,7 +95,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/cart/update",
+        `${import.meta.env.VITE_API_URL}cart/update`,
         {
           method: "PUT",
           headers: {
@@ -138,7 +139,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/cart/remove/${productId}`,
+        `${import.meta.env.VITE_API_URL}/cart/remove/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -176,7 +177,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/cart/clear",
+        `${import.meta.env.VITE_API_URL}/cart/clear`,
         {
           method: "DELETE",
           headers: {
