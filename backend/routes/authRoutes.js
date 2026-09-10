@@ -4,7 +4,7 @@ const {
   registerUser,
   loginUser,
   resetPassword,
-} = require("../controllers/AuthController");
+} = require("../controllers/authController");
 
 const authMiddleware = require("../middileware/authMiddleware");
 
