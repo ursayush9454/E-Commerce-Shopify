@@ -1,0 +1,550 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* =========================================
+   CONTACT PAGE
+========================================= */
+
+.contact-page {
+  width: 100%;
+  background: #f8f7f4;
+  color: #171717;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.contact-hero {
+  position: relative;
+
+  min-height: 430px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 80px 8%;
+
+  background: #151515;
+
+  overflow: hidden;
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+}
+
+.contact-eyebrow {
+  display: block;
+
+  margin-bottom: 22px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  color: #bdbdbd;
+}
+
+.contact-hero h1 {
+  margin: 0;
+
+  color: white;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(48px, 6vw, 82px);
+
+  line-height: 0.98;
+
+  font-weight: 500;
+}
+
+.contact-hero h1 em {
+  font-family: "Great Vibes", cursive;
+
+  font-size: 0.85em;
+
+  font-weight: 400;
+
+  color: #d5d5d5;
+}
+
+.contact-hero p {
+  max-width: 500px;
+
+  margin-top: 28px;
+
+  color: #aaa;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* Circle decoration */
+
+.contact-hero-circle {
+  position: absolute;
+
+  right: -120px;
+  top: -150px;
+
+  width: 520px;
+  height: 520px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 50%;
+}
+
+.contact-hero-circle::after {
+  content: "";
+
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  top: 80px;
+  left: 80px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.contact-content {
+  max-width: 1250px;
+
+  margin: auto;
+
+  padding: 100px 7%;
+
+  display: grid;
+
+  grid-template-columns: 0.9fr 1.1fr;
+
+  gap: 100px;
+}
+
+
+/* =========================================
+   LEFT INFO
+========================================= */
+
+.contact-section-label {
+  display: block;
+
+  margin-bottom: 18px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+.contact-info h2 {
+  margin: 0;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(38px, 4vw, 58px);
+
+  line-height: 1.05;
+
+  font-weight: 500;
+}
+
+.contact-info h2 em {
+  font-family: "Great Vibes", cursive;
+
+  font-weight: 400;
+}
+
+.contact-description {
+  max-width: 430px;
+
+  margin-top: 25px;
+
+  color: #777;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   CONTACT INFO ITEMS
+========================================= */
+
+.contact-info-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 32px;
+}
+
+.contact-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #ddd;
+
+  border-radius: 50%;
+
+  background: white;
+}
+
+.contact-info-item span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  color: #999;
+}
+
+.contact-info-item p {
+  margin: 0;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+
+  color: #222;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.contact-form-wrapper {
+  padding: 45px;
+
+  background: white;
+
+  border: 1px solid #e8e6e2;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+}
+
+.contact-form {
+  width: 100%;
+}
+
+.contact-form-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 22px;
+}
+
+.contact-input-group {
+  margin-bottom: 24px;
+}
+
+.contact-input-group label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  color: #777;
+
+  font-weight: 600;
+}
+
+.contact-input-group input,
+.contact-input-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px 15px;
+
+  border: 1px solid #dedcd8;
+
+  background: #fafaf9;
+
+  outline: none;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+
+  color: #222;
+
+  transition: 0.25s ease;
+}
+
+.contact-input-group textarea {
+  resize: vertical;
+
+  min-height: 140px;
+}
+
+.contact-input-group input:focus,
+.contact-input-group textarea:focus {
+  border-color: #222;
+
+  background: white;
+}
+
+.contact-input-group input::placeholder,
+.contact-input-group textarea::placeholder {
+  color: #aaa;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.contact-submit-btn {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border: none;
+
+  background: #171717;
+
+  color: white;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.contact-submit-btn:hover {
+  background: #333;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.contact-bottom {
+  padding: 80px 8%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: #171717;
+
+  color: white;
+}
+
+.contact-bottom > div:first-child > span {
+  font-family: "Great vibes", cursive;
+
+  font-size: 14px;
+
+  letter-spacing: 5px;
+}
+
+.contact-bottom h2 {
+  margin-top: 20px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 42px;
+
+  line-height: 1.05;
+
+  font-weight: 500;
+}
+
+.contact-bottom h2 em {
+  font-family: "Great Vibes", cursive;
+
+  font-weight: 400;
+
+  color: #ccc;
+}
+
+.contact-hours {
+  min-width: 220px;
+}
+
+.contact-hours span {
+  display: block;
+
+  margin-bottom: 20px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  color: #999;
+}
+
+.contact-hours p {
+  margin: 12px 0 3px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 12px;
+
+  color: #999;
+}
+
+.contact-hours strong {
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .contact-content {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+    padding: 80px 6%;
+  }
+
+  .contact-form-wrapper {
+    padding: 35px;
+  }
+
+  .contact-bottom {
+    gap: 50px;
+
+    align-items: flex-start;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .contact-hero {
+    min-height: 400px;
+
+    padding: 70px 6%;
+  }
+
+  .contact-hero-circle {
+    right: -250px;
+  }
+
+  .contact-content {
+    padding: 65px 5%;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .contact-form-wrapper {
+    padding: 25px 20px;
+  }
+
+  .contact-bottom {
+    flex-direction: column;
+
+    padding: 60px 6%;
+  }
+
+  .contact-bottom h2 {
+    font-size: 36px;
+  }
+}
+
+
+@media (max-width: 400px) {
+
+  .contact-hero h1 {
+    font-size: 43px;
+  }
+
+  .contact-info h2 {
+    font-size: 36px;
+  }
+
+  .contact-form-wrapper {
+    padding: 20px 15px;
+  }
+
+}

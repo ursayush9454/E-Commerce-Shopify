@@ -1,0 +1,459 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Great+Vibes&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.register-page {
+  min-height: 100vh;
+  background: #f5f3ef;
+  display: flex;
+  font-family: "DM Sans", sans-serif;
+}
+
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+
+.register-left {
+  width: 45%;
+  min-height: 90vh;
+  background: #171717;
+  color: white;
+  padding: 55px 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Decorative circles */
+
+.register-left::before {
+  content: "";
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  top: -180px;
+  left: -170px;
+}
+
+.register-left::after {
+  content: "";
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  right: -280px;
+  bottom: -250px;
+}
+
+
+/* Brand */
+
+.register-brand {
+  position: relative;
+  z-index: 2;
+  font-family: "Great Vibes", cursive;
+  font-size: 48px;
+  font-style: italic;
+  letter-spacing: 3px;
+}
+
+
+/* Content */
+
+.register-content {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+
+.register-eyebrow {
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.register-content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(45px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.register-content h1 em {
+  font-style: italic;
+}
+
+.register-content p {
+  max-width: 390px;
+  margin-top: 28px;
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* Footer */
+
+.register-footer {
+  position: relative;
+  z-index: 2;
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
+.register-right {
+  width: 55%;
+  min-height: 90vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 70px;
+}
+
+.register-form-wrapper {
+  width: 100%;
+  max-width: 460px;
+}
+
+
+/* Mobile logo */
+
+.mobile-register-brand {
+  display: none;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.register-heading {
+  margin-bottom: 32px;
+}
+
+.register-heading span {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  margin-bottom: 10px;
+}
+
+.register-heading h2 {
+  color: #171717;
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.register-heading p {
+  margin-top: 9px;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.register-form {
+  width: 100%;
+}
+
+.register-input-group {
+  margin-bottom: 18px;
+}
+
+.register-input-group label {
+  display: block;
+  color: #292929;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.register-input-group input {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border: 1px solid #dedede;
+  border-radius: 9px;
+  outline: none;
+  background: #fafafa;
+  color: #171717;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.register-input-group input::placeholder {
+  color: #aaa;
+}
+
+.register-input-group input:hover {
+  border-color: #c7c7c7;
+}
+
+.register-input-group input:focus {
+  background: #ffffff;
+  border-color: #171717;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================
+   TERMS
+========================================= */
+
+.register-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 5px 0 22px;
+}
+
+.register-terms input {
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #171717;
+}
+
+.register-terms label {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.register-btn {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 9px;
+  background: #171717;
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.register-btn:active {
+  transform: translateY(0);
+}
+
+.register-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =========================================
+   LOGIN LINK
+========================================= */
+
+.register-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 25px;
+  font-size: 13px;
+}
+
+.register-login span {
+  color: #888;
+}
+
+.register-login a {
+  color: #171717;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-login a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .register-left {
+    width: 42%;
+    padding: 45px 35px;
+  }
+
+  .register-right {
+    width: 58%;
+    padding: 45px 35px;
+  }
+
+  .register-brand {
+    font-size: 42px;
+  }
+
+  .register-content h1 {
+    font-size: 46px;
+  }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .register-page {
+    background: #ffffff;
+  }
+
+  .register-left {
+    display: none;
+  }
+
+  .register-right {
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px 25px;
+    align-items: flex-start;
+  }
+
+  .register-form-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .mobile-register-brand {
+    display: block;
+    text-align: center;
+    margin-bottom: 45px;
+    font-family: "Great Vibes", cursive;
+    font-size: 42px;
+    font-style: italic;
+    letter-spacing: 3px;
+    color: #171717;
+  }
+
+  .register-heading {
+    margin-bottom: 30px;
+  }
+
+  .register-heading h2 {
+    font-size: 30px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .register-right {
+    padding: 28px 20px;
+  }
+
+  .mobile-register-brand {
+    margin-bottom: 38px;
+    font-size: 38px;
+  }
+
+  .register-heading h2 {
+    font-size: 27px;
+  }
+
+  .register-heading p {
+    font-size: 13px;
+  }
+
+  .register-input-group {
+    margin-bottom: 16px;
+  }
+
+  .register-input-group input {
+    height: 48px;
+  }
+
+  .register-btn {
+    height: 50px;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+  .register-right {
+    padding: 25px 16px;
+  }
+
+  .mobile-register-brand {
+    font-size: 35px;
+  }
+
+  .register-heading h2 {
+    font-size: 25px;
+  }
+
+  .register-login {
+    font-size: 12px;
+  }
+
+}
+
