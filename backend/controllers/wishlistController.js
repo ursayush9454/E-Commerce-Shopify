@@ -2,10 +2,62 @@ const Wishlist = require("../models/Wishlist");
 
 // ================= ADD TO WISHLIST =================
 
+// const addToWishlist = async (req, res) => {
+//   try {
+//     const userId = req.user.userId;
+//     const { productId } = req.body;
+
+//     if (!productId) {
+//       return res.status(400).json({
+//         message: "Product ID is required",
+//       });
+//     }
+
+//     const alreadyExists = await Wishlist.findOne({
+//       user: userId,
+//       product: productId,
+//     });
+
+//     if (alreadyExists) {
+//       return res.status(400).json({
+//         message: "Product already in wishlist",
+//       });
+//     }
+
+//     const wishlist = await Wishlist.create({
+//       user: userId,
+//       product: productId,
+//     });
+
+//     res.status(201).json({
+//       message: "Product added to wishlist",
+//       wishlist,
+//     });
+
+//   } catch (error) {
+//     res.status(500).json({
+//       message: "Failed to add product to wishlist",
+//       error: error.message,
+//     });
+//   }
+// };
 const addToWishlist = async (req, res) => {
   try {
-    const userId = req.user.id;
+    console.log("========== WISHLIST ==========");
+    console.log("REQ.USER:", req.user);
+    console.log("REQ.BODY:", req.body);
+
+    const userId = req.user.userId;
     const { productId } = req.body;
+
+    console.log("USER ID:", userId);
+    console.log("PRODUCT ID:", productId);
+
+    if (!userId) {
+      return res.status(401).json({
+        message: "User ID missing from token",
+      });
+    }
 
     if (!productId) {
       return res.status(400).json({
@@ -29,12 +81,16 @@ const addToWishlist = async (req, res) => {
       product: productId,
     });
 
+    console.log("WISHLIST CREATED:", wishlist);
+
     res.status(201).json({
       message: "Product added to wishlist",
       wishlist,
     });
 
   } catch (error) {
+    console.log("🔥 WISHLIST ERROR:", error);
+
     res.status(500).json({
       message: "Failed to add product to wishlist",
       error: error.message,
@@ -42,12 +98,11 @@ const addToWishlist = async (req, res) => {
   }
 };
 
-
 // ================= GET WISHLIST =================
 
 const getWishlist = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
 
     const wishlist = await Wishlist.find({
       user: userId,
@@ -71,7 +126,7 @@ const getWishlist = async (req, res) => {
 
 const removeFromWishlist = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     const { productId } = req.params;
 
     const deleted = await Wishlist.findOneAndDelete({
