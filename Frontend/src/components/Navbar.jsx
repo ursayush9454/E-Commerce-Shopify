@@ -22,6 +22,105 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
 
   // =========================
+  // CART COUNT
+  // =========================
+
+  const [cartCount, setCartCount] = useState(0);
+
+  // =========================
+  // FETCH CART COUNT
+  // =========================
+
+  const fetchCartCount = async () => {
+    const token = localStorage.getItem("token");
+
+    // User login nahi hai
+    if (!token) {
+      setCartCount(0);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/cart`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("Navbar Cart Response:", data);
+
+      // Token expired / invalid
+      if (response.status === 401) {
+        setCartCount(0);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        return;
+      }
+
+      // Cart empty
+      if (!response.ok) {
+        setCartCount(0);
+        return;
+      }
+
+      const items = data.cart?.items || [];
+
+      // Total quantity calculate
+      const totalQuantity = items.reduce(
+        (total, item) =>
+          total + Number(item.quantity || 0),
+        0
+      );
+
+      setCartCount(totalQuantity);
+
+    } catch (error) {
+      console.error(
+        "Navbar Cart Count Error:",
+        error
+      );
+
+      setCartCount(0);
+    }
+  };
+
+  // =========================
+  // INITIAL CART COUNT
+  // =========================
+
+  useEffect(() => {
+    fetchCartCount();
+  }, []);
+
+  // =========================
+  // REFRESH CART COUNT
+  // =========================
+
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      fetchCartCount();
+    };
+
+    window.addEventListener(
+      "cartUpdated",
+      handleCartUpdate
+    );
+
+    return () => {
+      window.removeEventListener(
+        "cartUpdated",
+        handleCartUpdate
+      );
+    };
+  }, []);
+
+  // =========================
   // SEARCH
   // =========================
 
@@ -35,7 +134,10 @@ const Navbar = () => {
       return;
     }
 
-    navigate(`/?search=${encodeURIComponent(value)}#products`);
+    navigate(
+      `/?search=${encodeURIComponent(value)}#products`
+    );
+
     setSearchOpen(true);
   };
 
@@ -61,8 +163,22 @@ const Navbar = () => {
       return;
     }
 
-    // Wishlist page
     navigate("/wishlist");
+  };
+
+  // =========================
+  // PROFILE / ACCOUNT
+  // =========================
+
+  const handleProfile = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    navigate("/profile");
   };
 
   // =========================
@@ -75,7 +191,7 @@ const Navbar = () => {
   };
 
   // =========================
-  // ENTER KEY SEARCH
+  // ESCAPE KEY SEARCH
   // =========================
 
   useEffect(() => {
@@ -85,10 +201,16 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
   }, []);
 
@@ -107,10 +229,11 @@ const Navbar = () => {
           <span>SHOPIFY</span>
         </Link>
 
-
         {/* ================= DESKTOP MENU ================= */}
 
         <div className="nav-menu">
+
+          {/* SHOP */}
 
           <Link
             to="/"
@@ -119,13 +242,16 @@ const Navbar = () => {
             Shop
           </Link>
 
-
-          {/* Collections */}
+          {/* ================= COLLECTIONS ================= */}
 
           <div
             className="collection-dropdown"
-            onMouseEnter={() => setCollectionOpen(true)}
-            onMouseLeave={() => setCollectionOpen(false)}
+            onMouseEnter={() =>
+              setCollectionOpen(true)
+            }
+            onMouseLeave={() =>
+              setCollectionOpen(false)
+            }
           >
 
             <button
@@ -146,12 +272,13 @@ const Navbar = () => {
               />
             </button>
 
-
             {collectionOpen && (
               <div className="collection-menu">
 
                 <div className="collection-heading">
-                  <span>SHOP COLLECTIONS</span>
+                  <span>
+                    SHOP COLLECTIONS
+                  </span>
                 </div>
 
                 <Link
@@ -245,6 +372,7 @@ const Navbar = () => {
 
           </div>
 
+          {/* ABOUT */}
 
           <Link
             to="/about"
@@ -253,6 +381,7 @@ const Navbar = () => {
             About
           </Link>
 
+          {/* CONTACT */}
 
           <Link
             to="/contact"
@@ -263,13 +392,11 @@ const Navbar = () => {
 
         </div>
 
-
         {/* ================= ACTIONS ================= */}
 
         <div className="nav-actions">
 
-
-          {/* SEARCH */}
+          {/* ================= SEARCH ================= */}
 
           <form
             className={`search-box ${
@@ -284,7 +411,9 @@ const Navbar = () => {
               onChange={(e) =>
                 setSearch(e.target.value)
               }
-              onFocus={() => setSearchOpen(true)}
+              onFocus={() =>
+                setSearchOpen(true)
+              }
               placeholder="Search products..."
               aria-label="Search products"
             />
@@ -312,8 +441,7 @@ const Navbar = () => {
 
           </form>
 
-
-          {/* WISHLIST */}
+          {/* ================= WISHLIST ================= */}
 
           <button
             className="icon-btn wishlist-nav-btn desktop-icon"
@@ -326,22 +454,20 @@ const Navbar = () => {
             />
           </button>
 
+          {/* ================= USER / PROFILE ================= */}
 
-          {/* USER */}
-
-          <Link
-            to="/login"
+          <button
             className="icon-btn desktop-icon user-nav-btn"
+            onClick={handleProfile}
             aria-label="Account"
           >
             <User
               size={20}
               strokeWidth={1.8}
             />
-          </Link>
+          </button>
 
-
-          {/* CART */}
+          {/* ================= CART ================= */}
 
           <Link
             to="/cart"
@@ -354,13 +480,11 @@ const Navbar = () => {
             />
 
             <span className="cart-count">
-              0
+              {cartCount}
             </span>
-
           </Link>
 
-
-          {/* MOBILE MENU */}
+          {/* ================= MOBILE MENU ================= */}
 
           <button
             className="mobile-menu-btn"
@@ -380,11 +504,12 @@ const Navbar = () => {
 
       </div>
 
-
       {/* ================= MOBILE MENU ================= */}
 
       {mobileMenu && (
         <div className="mobile-menu">
+
+          {/* SHOP */}
 
           <Link
             to="/"
@@ -393,17 +518,22 @@ const Navbar = () => {
             Shop
           </Link>
 
+          {/* COLLECTIONS */}
 
           <div className="mobile-collections">
 
             <button
               className="mobile-collection-title"
               onClick={() =>
-                setCollectionOpen(!collectionOpen)
+                setCollectionOpen(
+                  !collectionOpen
+                )
               }
             >
 
-              <span>Collections</span>
+              <span>
+                Collections
+              </span>
 
               <ChevronDown
                 size={17}
@@ -415,7 +545,6 @@ const Navbar = () => {
               />
 
             </button>
-
 
             {collectionOpen && (
               <div className="mobile-collection-list">
@@ -489,6 +618,7 @@ const Navbar = () => {
 
           </div>
 
+          {/* ABOUT */}
 
           <Link
             to="/about"
@@ -497,6 +627,7 @@ const Navbar = () => {
             About
           </Link>
 
+          {/* CONTACT */}
 
           <Link
             to="/contact"
@@ -505,21 +636,35 @@ const Navbar = () => {
             Contact
           </Link>
 
+          {/* ================= MOBILE EXTRA ================= */}
 
           <div className="mobile-extra">
 
-            <button onClick={handleWishlist}>
+            {/* WISHLIST */}
+
+            <button
+              onClick={() => {
+                closeMobileMenu();
+                handleWishlist();
+              }}
+            >
               <Heart size={19} />
               Wishlist
             </button>
 
-            <Link
-              to="/login"
-              onClick={closeMobileMenu}
+            {/* ACCOUNT / PROFILE */}
+
+            <button
+              onClick={() => {
+                closeMobileMenu();
+                handleProfile();
+              }}
             >
               <User size={19} />
               Account
-            </Link>
+            </button>
+
+            {/* CART */}
 
             <Link
               to="/cart"

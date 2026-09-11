@@ -48,11 +48,7 @@ const Cart = () => {
         return;
       }
 
-      // Backend response:
-      // data.cart.items
-
       setCartItems(data.cart?.items || []);
-
     } catch (error) {
       console.error("Fetch Cart Error:", error);
     } finally {
@@ -82,20 +78,30 @@ const Cart = () => {
       (item) => item.product?._id === productId
     );
 
-    if (!currentItem) return;
+    if (!currentItem) {
+      console.log("Cart item not found");
+      return;
+    }
 
-    const newQuantity =
-      currentItem.quantity + change;
+    const currentQuantity = Number(currentItem.quantity);
 
-    // Quantity 0 hone par remove kar do
-    if (newQuantity <= 0) {
-      removeItem(productId);
+    const newQuantity = currentQuantity + change;
+
+    console.log("Current Quantity:", currentQuantity);
+    console.log("New Quantity:", newQuantity);
+
+    // =========================
+    // Quantity 1 se 0 hone par
+    // Product remove hoga
+    // =========================
+    if (newQuantity < 1) {
+      await removeItem(productId);
       return;
     }
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}cart/update`,
+        `${import.meta.env.VITE_API_URL}/cart/update`,
         {
           method: "PUT",
           headers: {
@@ -113,14 +119,21 @@ const Cart = () => {
 
       console.log("Update Cart Response:", data);
 
+      if (response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/login");
+        return;
+      }
+
       if (!response.ok) {
         alert(data.message || "Unable to update cart");
         return;
       }
 
-      // Backend se updated cart
+      // Updated cart set karo
       setCartItems(data.cart?.items || []);
-
     } catch (error) {
       console.error("Update Cart Error:", error);
     }
@@ -152,13 +165,20 @@ const Cart = () => {
 
       console.log("Remove Cart Response:", data);
 
+      if (response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/login");
+        return;
+      }
+
       if (!response.ok) {
         alert(data.message || "Unable to remove item");
         return;
       }
 
       setCartItems(data.cart?.items || []);
-
     } catch (error) {
       console.error("Remove Cart Error:", error);
     }
@@ -188,13 +208,22 @@ const Cart = () => {
 
       const data = await response.json();
 
+      console.log("Clear Cart Response:", data);
+
+      if (response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/login");
+        return;
+      }
+
       if (!response.ok) {
         alert(data.message || "Unable to clear cart");
         return;
       }
 
       setCartItems([]);
-
     } catch (error) {
       console.error("Clear Cart Error:", error);
     }
@@ -220,7 +249,6 @@ const Cart = () => {
     return (
       <div className="cart-page">
         <div className="empty-cart">
-
           <div className="empty-cart-icon">
             🔐
           </div>
@@ -239,7 +267,6 @@ const Cart = () => {
           >
             LOGIN
           </Link>
-
         </div>
       </div>
     );
@@ -252,7 +279,6 @@ const Cart = () => {
     return (
       <div className="cart-page">
         <div className="empty-cart">
-
           <div className="empty-cart-icon">
             🛒
           </div>
@@ -272,7 +298,6 @@ const Cart = () => {
           >
             CONTINUE SHOPPING
           </Link>
-
         </div>
       </div>
     );
@@ -302,7 +327,6 @@ const Cart = () => {
       <div className="cart-wrapper">
 
         {/* HEADER */}
-
         <div className="cart-header">
 
           <div>
@@ -325,11 +349,9 @@ const Cart = () => {
         </div>
 
         {/* CONTENT */}
-
         <div className="cart-content">
 
           {/* ITEMS */}
-
           <div className="cart-items">
 
             {cartItems.map((item) => {
@@ -343,7 +365,6 @@ const Cart = () => {
                 >
 
                   {/* IMAGE */}
-
                   <div className="cart-product-image">
 
                     <img
@@ -354,7 +375,6 @@ const Cart = () => {
                   </div>
 
                   {/* INFO */}
-
                   <div className="cart-product-info">
 
                     <span className="product-category">
@@ -367,18 +387,18 @@ const Cart = () => {
 
                     <p className="product-price">
                       ₹
-                      {(
-                        product?.price || 0
-                      ).toLocaleString("en-IN")}
+                      {(product?.price || 0).toLocaleString(
+                        "en-IN"
+                      )}
                     </p>
 
                     {/* ACTIONS */}
-
                     <div className="item-actions">
 
                       <div className="quantity-box">
 
                         <button
+                          type="button"
                           onClick={() =>
                             updateQuantity(
                               product?._id,
@@ -394,6 +414,7 @@ const Cart = () => {
                         </span>
 
                         <button
+                          type="button"
                           onClick={() =>
                             updateQuantity(
                               product?._id,
@@ -407,6 +428,7 @@ const Cart = () => {
                       </div>
 
                       <button
+                        type="button"
                         className="remove-button"
                         onClick={() =>
                           removeItem(
@@ -422,7 +444,6 @@ const Cart = () => {
                   </div>
 
                   {/* ITEM TOTAL */}
-
                   <div className="item-total">
 
                     ₹
@@ -438,7 +459,6 @@ const Cart = () => {
             })}
 
             {/* CONTINUE */}
-
             <Link
               to="/"
               className="continue-shopping"
@@ -447,8 +467,8 @@ const Cart = () => {
             </Link>
 
             {/* CLEAR CART */}
-
             <button
+              type="button"
               className="remove-button"
               onClick={clearCart}
               style={{
@@ -461,7 +481,6 @@ const Cart = () => {
           </div>
 
           {/* SUMMARY */}
-
           <div className="cart-summary">
 
             <div className="summary-card">
@@ -475,7 +494,6 @@ const Cart = () => {
               </h2>
 
               {/* SUBTOTAL */}
-
               <div className="summary-row">
 
                 <span>
@@ -492,7 +510,6 @@ const Cart = () => {
               </div>
 
               {/* SHIPPING */}
-
               <div className="summary-row">
 
                 <span>
@@ -511,7 +528,6 @@ const Cart = () => {
               <div className="summary-line"></div>
 
               {/* TOTAL */}
-
               <div className="summary-total">
 
                 <span>
@@ -528,7 +544,6 @@ const Cart = () => {
               </div>
 
               {/* CHECKOUT */}
-
               <Link
                 to="/checkout"
                 className="checkout-button"
